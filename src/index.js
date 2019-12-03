@@ -6,11 +6,13 @@ import Routes from './routes';
 
 // import { Container } from './styles';
 
+import './config/ReactotronConfig';
+
 export default function App() {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-      <Routes />
-    </>
-  );
+    return (
+        <>
+            <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+            <Routes />
+        </>
+    );
 }
