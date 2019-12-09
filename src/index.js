@@ -1,18 +1,18 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { StatusBar } from 'react-native';
 import 'react-native-gesture-handler';
 
-import Routes from './routes';
-
-// import { Container } from './styles';
-
 import './config/ReactotronConfig';
+import { store } from './store';
 
-export default function App() {
+import App from './App';
+
+export default function Index() {
     return (
-        <>
+        <Provider store={store}>
             <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-            <Routes />
-        </>
+            <App />
+        </Provider>
     );
 }
