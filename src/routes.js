@@ -5,6 +5,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import Header from '~/components/Header';
+
 import SignIn from '~/pages/SignIn';
 import CheckIns from '~/pages/CheckIns';
 
@@ -19,49 +21,68 @@ export default (signedIn = false) =>
                 Sign: createSwitchNavigator({
                     SignIn,
                 }),
-                App: createBottomTabNavigator(
+                App: createStackNavigator(
                     {
-                        CheckIns,
-                        AskForHelp: {
-                            screen: createStackNavigator(
+                        MyTab: {
+                            screen: createBottomTabNavigator(
                                 {
-                                    Questions,
-                                    NewQuestion,
-                                    Answer,
+                                    CheckIns,
+                                    AskForHelp: {
+                                        screen: createStackNavigator(
+                                            {
+                                                Questions,
+                                                NewQuestion,
+                                                Answer,
+                                            },
+                                            {
+                                                defaultNavigationOptions: {
+                                                    headerTransparent: true,
+                                                    headerTintColor: '#FFF',
+                                                    headerLeftContainerStyle: {
+                                                        marginLeft: 20,
+                                                    },
+                                                },
+                                                cardStyle: {
+                                                    backgroundColor: '#F5F5F5',
+                                                },
+                                            }
+                                        ),
+                                        navigationOptions: {
+                                            tabBarLabel: 'Pedir Ajuda',
+                                            activeTintColor: '#EE4E62',
+                                            tabBarIcon: (
+                                                <Icon
+                                                    name="live-help"
+                                                    size={20}
+                                                    color="#999999"
+                                                />
+                                            ),
+                                        },
+                                    },
                                 },
                                 {
-                                    defaultNavigationOptions: {
-                                        headerTransparent: true,
-                                        headerTintColor: '#FFF',
-                                        headerLeftContainerStyle: {
-                                            marginLeft: 20,
+                                    tabBarOptions: {
+                                        keyboardHidesTabBar: true,
+                                        activeTintColor: '#EE4E62',
+                                        inactiveTintColor: '#999999',
+                                        style: {
+                                            borderColor: '#DDDDDD',
+                                            borderStyle: 'solid',
+                                            backgroundColor: '#FFFFFF',
+                                            padding: 15,
+                                            height: 70,
                                         },
                                     },
                                 }
                             ),
-                            navigationOptions: {
-                                tabBarLabel: 'Pedir Ajuda',
-                                activeTintColor: '#EE4E62',
-                                tabBarIcon: (
-                                    <Icon
-                                        name="live-help"
-                                        size={20}
-                                        color="#999999"
-                                    />
-                                ),
-                            },
                         },
                     },
                     {
-                        tabBarOptions: {
-                            keyboardHidesTabBar: true,
-                            activeTintColor: '#EE4E62',
-                            inactiveTintColor: '#999999',
-                            style: {
-                                backgroundColor: '#FFFFFF',
-                                padding: 15,
-                                height: 70,
-                            },
+                        defaultNavigationOptions: navigation => ({
+                            header: <Header {...navigation} />,
+                        }),
+                        cardStyle: {
+                            backgroundColor: '#F5F5F5',
                         },
                     }
                 ),
