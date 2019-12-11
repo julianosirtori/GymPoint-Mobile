@@ -50,11 +50,11 @@ export default (signedIn = false) =>
                                         navigationOptions: {
                                             tabBarLabel: 'Pedir Ajuda',
                                             activeTintColor: '#EE4E62',
-                                            tabBarIcon: (
+                                            tabBarIcon: ({ tintColor }) => (
                                                 <Icon
                                                     name="live-help"
                                                     size={20}
-                                                    color="#999999"
+                                                    color={tintColor}
                                                 />
                                             ),
                                         },
