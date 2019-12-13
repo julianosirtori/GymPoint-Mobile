@@ -36,11 +36,7 @@ export default (signedIn = false) =>
                                             },
                                             {
                                                 defaultNavigationOptions: {
-                                                    headerTransparent: true,
-                                                    headerTintColor: '#FFF',
-                                                    headerLeftContainerStyle: {
-                                                        marginLeft: 20,
-                                                    },
+                                                    header: null,
                                                 },
                                                 cardStyle: {
                                                     backgroundColor: '#F5F5F5',

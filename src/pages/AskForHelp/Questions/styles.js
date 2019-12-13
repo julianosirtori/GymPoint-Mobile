@@ -8,7 +8,7 @@ export const ListAnswer = styled.FlatList`
     margin-top: 20px;
 `;
 
-export const Answer = styled.View`
+export const Answer = styled.TouchableOpacity`
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -31,7 +31,7 @@ export const Left = styled.View`
 `;
 
 export const Status = styled.Text`
-    color: #999999;
+    color: ${props => (props.answer ? '#42CB59' : '#999999')};
     font-size: 14px;
     font-weight: bold;
     margin-left: 16px;

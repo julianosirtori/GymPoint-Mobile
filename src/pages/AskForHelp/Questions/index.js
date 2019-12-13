@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useSelector } from 'react-redux';
 import { parseISO, formatDistance } from 'date-fns';
 import pt from 'date-fns/locale/pt';
@@ -16,7 +17,7 @@ import {
     Content,
 } from './styles';
 
-export default function Questions() {
+export default function Questions({ navigation }) {
     const student = useSelector(state => state.auth.student);
     const [questions, setQuestions] = useState([]);
 
@@ -35,16 +36,34 @@ export default function Questions() {
         loadQuestions();
     }, [student.id]);
 
+    function handleNewQuestion() {
+        navigation.navigate('NewQuestion');
+    }
+
+    function handleViewAnswer(question) {
+        navigation.navigate('Answer', { question });
+    }
+
     return (
         <Container>
-            <Button>Novo pedido de auxílio</Button>
+            <Button onPress={handleNewQuestion}>Novo pedido de auxílio</Button>
             <ListAnswer
                 data={questions}
                 renderItem={({ item }) => (
-                    <Answer key={item.id}>
+                    <Answer
+                        key={item.id}
+                        onPress={() => handleViewAnswer(item)}
+                    >
                         <HeaderAnswer>
                             <Left>
-                                <Status>Sem resposta</Status>
+                                <Icon
+                                    name="check-circle"
+                                    size={16}
+                                    color={item.answer ? '#42CB59' : '#999999'}
+                                />
+                                <Status answer={item.answer ? 1 : 0}>
+                                    Sem resposta
+                                </Status>
                             </Left>
                             <Date>{item.dataFormated}</Date>
                         </HeaderAnswer>
