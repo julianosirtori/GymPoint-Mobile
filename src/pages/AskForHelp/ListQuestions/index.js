@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useSelector } from 'react-redux';
-import { parseISO, formatDistance } from 'date-fns';
-import pt from 'date-fns/locale/pt';
+import PropTypes from 'prop-types';
 import api from '~/services/api';
 
 import Button from '~/components/Button';
@@ -17,7 +16,7 @@ import {
     Content,
 } from './styles';
 
-export default function Questions({ navigation }) {
+export default function ListQuestions({ navigation }) {
     const student = useSelector(state => state.auth.student);
     const [questions, setQuestions] = useState([]);
 
@@ -29,7 +28,7 @@ export default function Questions({ navigation }) {
             setQuestions(
                 response.data.map(item => ({
                     ...item,
-                    dataFormated: 'teste',
+                    dataFormated: '',
                 }))
             );
         }
@@ -41,7 +40,8 @@ export default function Questions({ navigation }) {
     }
 
     function handleViewAnswer(question) {
-        navigation.navigate('Answer', { question });
+        console.tron.log(question);
+        navigation.navigate('Question', { data: question });
     }
 
     return (
@@ -62,7 +62,9 @@ export default function Questions({ navigation }) {
                                     color={item.answer ? '#42CB59' : '#999999'}
                                 />
                                 <Status answer={item.answer ? 1 : 0}>
-                                    Sem resposta
+                                    {item.answer
+                                        ? 'Respondido'
+                                        : 'Sem resposta'}
                                 </Status>
                             </Left>
                             <Date>{item.dataFormated}</Date>
@@ -74,3 +76,9 @@ export default function Questions({ navigation }) {
         </Container>
     );
 }
+
+ListQuestions.propTypes = {
+    navigation: PropTypes.shape({
+        navigate: PropTypes.func.isRequired,
+    }).isRequired,
+};

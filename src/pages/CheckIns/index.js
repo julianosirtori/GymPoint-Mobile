@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { parseISO, formatDistance } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '~/services/api';
@@ -72,9 +73,15 @@ export default function CheckIns() {
     );
 }
 
+function TabBarIcon({ tintColor }) {
+    return <Icon name="event" size={20} color={tintColor} />;
+}
+
+TabBarIcon.propTypes = {
+    tintColor: PropTypes.string.isRequired,
+};
+
 CheckIns.navigationOptions = {
     tabBarLabel: 'Check-ins',
-    tabBarIcon: ({ tintColor }) => (
-        <Icon name="event" size={20} color={tintColor} />
-    ),
+    tabBarIcon: TabBarIcon,
 };

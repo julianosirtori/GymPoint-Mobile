@@ -10,9 +10,9 @@ import Header from '~/components/Header';
 import SignIn from '~/pages/SignIn';
 import CheckIns from '~/pages/CheckIns';
 
-import Questions from '~/pages/AskForHelp/Questions';
+import ListQuestions from '~/pages/AskForHelp/ListQuestions';
 import NewQuestion from '~/pages/AskForHelp/NewQuestion';
-import Answer from '~/pages/AskForHelp/Answer';
+import Question from '~/pages/AskForHelp/Question';
 
 export default (signedIn = false) =>
     createAppContainer(
@@ -30,9 +30,9 @@ export default (signedIn = false) =>
                                     AskForHelp: {
                                         screen: createStackNavigator(
                                             {
-                                                Questions,
+                                                ListQuestions,
                                                 NewQuestion,
-                                                Answer,
+                                                Question,
                                             },
                                             {
                                                 defaultNavigationOptions: {
