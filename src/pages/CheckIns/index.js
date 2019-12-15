@@ -23,7 +23,6 @@ export default function CheckIns() {
     useEffect(() => {
         async function loadCheckIns() {
             const response = await api.get(`/students/${student.id}/checkins`);
-            console.tron.log(response.data);
             setCheckIns(
                 response.data.map(item => ({
                     ...item,
@@ -63,11 +62,12 @@ export default function CheckIns() {
             <ListCheckin
                 data={checkIns}
                 renderItem={({ item }) => (
-                    <Checkin key={item.id}>
+                    <Checkin>
                         <TextTitleCheckin>{`Check-in #${item.id}`}</TextTitleCheckin>
                         <TextDateCheckin>{item.dateFormated}</TextDateCheckin>
                     </Checkin>
                 )}
+                keyExtractor={item => item.id.toString()}
             />
         </Container>
     );

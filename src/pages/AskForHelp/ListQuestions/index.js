@@ -49,11 +49,9 @@ export default function ListQuestions({ navigation }) {
             <Button onPress={handleNewQuestion}>Novo pedido de auxílio</Button>
             <ListAnswer
                 data={questions}
+                keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) => (
-                    <Answer
-                        key={item.id}
-                        onPress={() => handleViewAnswer(item)}
-                    >
+                    <Answer onPress={() => handleViewAnswer(item)}>
                         <HeaderAnswer>
                             <Left>
                                 <Icon
