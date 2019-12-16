@@ -21,64 +21,50 @@ export default (signedIn = false) =>
                 Sign: createSwitchNavigator({
                     SignIn,
                 }),
-                App: createStackNavigator(
+                App: createBottomTabNavigator(
                     {
-                        MyTab: {
-                            screen: createBottomTabNavigator(
+                        CheckIns,
+                        AskForHelp: {
+                            screen: createStackNavigator(
                                 {
-                                    CheckIns,
-                                    AskForHelp: {
-                                        screen: createStackNavigator(
-                                            {
-                                                ListQuestions,
-                                                NewQuestion,
-                                                Question,
-                                            },
-                                            {
-                                                defaultNavigationOptions: {
-                                                    header: null,
-                                                },
-                                                cardStyle: {
-                                                    backgroundColor: '#F5F5F5',
-                                                },
-                                            }
-                                        ),
-                                        navigationOptions: {
-                                            tabBarLabel: 'Pedir Ajuda',
-                                            activeTintColor: '#EE4E62',
-                                            tabBarIcon: ({ tintColor }) => (
-                                                <Icon
-                                                    name="live-help"
-                                                    size={20}
-                                                    color={tintColor}
-                                                />
-                                            ),
-                                        },
-                                    },
+                                    ListQuestions,
+                                    NewQuestion,
+                                    Question,
                                 },
                                 {
-                                    tabBarOptions: {
-                                        keyboardHidesTabBar: true,
-                                        activeTintColor: '#EE4E62',
-                                        inactiveTintColor: '#999999',
-                                        style: {
-                                            borderColor: '#DDDDDD',
-                                            borderStyle: 'solid',
-                                            backgroundColor: '#FFFFFF',
-                                            padding: 15,
-                                            height: 70,
-                                        },
+                                    defaultNavigationOptions: navigation => ({
+                                        header: <Header {...navigation} />,
+                                    }),
+                                    cardStyle: {
+                                        backgroundColor: '#F5F5F5',
                                     },
                                 }
                             ),
+                            navigationOptions: {
+                                tabBarLabel: 'Pedir Ajuda',
+                                activeTintColor: '#EE4E62',
+                                tabBarIcon: ({ tintColor }) => (
+                                    <Icon
+                                        name="live-help"
+                                        size={20}
+                                        color={tintColor}
+                                    />
+                                ),
+                            },
                         },
                     },
                     {
-                        defaultNavigationOptions: navigation => ({
-                            header: <Header {...navigation} />,
-                        }),
-                        cardStyle: {
-                            backgroundColor: '#F5F5F5',
+                        tabBarOptions: {
+                            keyboardHidesTabBar: true,
+                            activeTintColor: '#EE4E62',
+                            inactiveTintColor: '#999999',
+                            style: {
+                                borderColor: '#DDDDDD',
+                                borderStyle: 'solid',
+                                backgroundColor: '#FFFFFF',
+                                padding: 15,
+                                height: 70,
+                            },
                         },
                     }
                 ),

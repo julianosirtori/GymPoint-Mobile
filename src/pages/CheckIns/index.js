@@ -7,7 +7,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '~/services/api';
 
+import Header from '~/components/Header';
 import Button from '~/components/Button';
+
 import {
     Container,
     ListCheckin,
@@ -57,19 +59,24 @@ export default function CheckIns() {
     }
 
     return (
-        <Container>
-            <Button onPress={newCheckIn}>Novo check-in</Button>
-            <ListCheckin
-                data={checkIns}
-                renderItem={({ item }) => (
-                    <Checkin>
-                        <TextTitleCheckin>{`Check-in #${item.id}`}</TextTitleCheckin>
-                        <TextDateCheckin>{item.dateFormated}</TextDateCheckin>
-                    </Checkin>
-                )}
-                keyExtractor={item => item.id.toString()}
-            />
-        </Container>
+        <>
+            <Header />
+            <Container>
+                <Button onPress={newCheckIn}>Novo check-in</Button>
+                <ListCheckin
+                    data={checkIns}
+                    renderItem={({ item }) => (
+                        <Checkin>
+                            <TextTitleCheckin>{`Check-in #${item.id}`}</TextTitleCheckin>
+                            <TextDateCheckin>
+                                {item.dateFormated}
+                            </TextDateCheckin>
+                        </Checkin>
+                    )}
+                    keyExtractor={item => item.id.toString()}
+                />
+            </Container>
+        </>
     );
 }
 
