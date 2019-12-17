@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export const Container = styled.View`
     height: 44px;
@@ -18,7 +17,7 @@ export const Image = styled.Image`
     height: 19px;
 `;
 
-export const Back = styled(Icon)`
+export const Back = styled.TouchableOpacity`
     position: absolute;
     left: 20px;
 `;
