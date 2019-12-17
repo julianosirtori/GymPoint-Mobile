@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
     padding: 20px;
+    flex: 1;
 `;
 
 export const Form = styled.View``;

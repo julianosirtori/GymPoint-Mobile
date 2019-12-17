@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
 
 import api from '~/services/api';
 
