@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Alert, Platform } from 'react-native';
+import PropTypes from 'prop-types';
+import { Alert } from 'react-native';
 
 import api from '~/services/api';
 
@@ -8,7 +9,7 @@ import Button from '~/components/Button';
 
 import { Container, Form, TextArea } from './styles';
 
-export default function NewQuestion() {
+export default function NewQuestion({ navigation }) {
     const student = useSelector(state => state.auth.student);
     const [question, setQuestion] = useState('');
 
@@ -23,6 +24,7 @@ export default function NewQuestion() {
             'Seu pedido de auxilio foi salvo com sucesso !'
         );
         setQuestion('');
+        navigation.goBack();
     }
 
     return (
@@ -42,3 +44,9 @@ export default function NewQuestion() {
         </Container>
     );
 }
+
+NewQuestion.propTypes = {
+    navigation: PropTypes.shape({
+        goBack: PropTypes.func.isRequired,
+    }).isRequired,
+};

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { withNavigationFocus } from 'react-navigation';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import api from '~/services/api';
@@ -16,31 +17,37 @@ import {
     Content,
 } from './styles';
 
-export default function ListQuestions({ navigation }) {
+function ListQuestions({ navigation, isFocused }) {
     const student = useSelector(state => state.auth.student);
     const [questions, setQuestions] = useState([]);
 
+    async function loadQuestions() {
+        const response = await api.get(`/students/${student.id}/help-orders`);
+        setQuestions(
+            response.data.map(item => ({
+                ...item,
+                dataFormated: '',
+            }))
+        );
+    }
+
     useEffect(() => {
-        async function loadQuestions() {
-            const response = await api.get(
-                `/students/${student.id}/help-orders`
-            );
-            setQuestions(
-                response.data.map(item => ({
-                    ...item,
-                    dataFormated: '',
-                }))
-            );
-        }
         loadQuestions();
-    }, [student.id]);
+        // eslint-disable-next-line
+    }, []);
+
+    useEffect(() => {
+        if (isFocused) {
+            loadQuestions();
+        }
+        // eslint-disable-next-line
+    }, [isFocused]);
 
     function handleNewQuestion() {
         navigation.navigate('NewQuestion');
     }
 
     function handleViewAnswer(question) {
-        console.tron.log(question);
         navigation.navigate('Question', { data: question });
     }
 
@@ -79,4 +86,7 @@ ListQuestions.propTypes = {
     navigation: PropTypes.shape({
         navigate: PropTypes.func.isRequired,
     }).isRequired,
+    isFocused: PropTypes.bool,
 };
+
+export default withNavigationFocus(ListQuestions);
