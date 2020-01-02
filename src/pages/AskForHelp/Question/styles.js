@@ -25,7 +25,7 @@ export const Title = styled.Text`
     font-weight: bold;
 `;
 
-export const Date = styled.Text`
+export const DateText = styled.Text`
     color: #666666;
     font-size: 14px;
 `;

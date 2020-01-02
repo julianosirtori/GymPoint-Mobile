@@ -37,7 +37,7 @@ export const Status = styled.Text`
     margin-left: 16px;
 `;
 
-export const Date = styled.Text`
+export const TextDate = styled.Text`
     color: #666666;
     font-size: 14px;
 `;

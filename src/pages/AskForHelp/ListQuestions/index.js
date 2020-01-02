@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { withNavigationFocus } from 'react-navigation';
+import { parseISO, formatDistance } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import api from '~/services/api';
@@ -12,7 +14,7 @@ import {
     ListAnswer,
     HeaderAnswer,
     Left,
-    Date,
+    TextDate,
     Status,
     Content,
 } from './styles';
@@ -26,7 +28,13 @@ function ListQuestions({ navigation, isFocused }) {
         setQuestions(
             response.data.map(item => ({
                 ...item,
-                dataFormated: '',
+                dateFormated: formatDistance(
+                    parseISO(item.createdAt),
+                    new Date(),
+                    {
+                        locale: pt,
+                    }
+                ),
             }))
         );
     }
@@ -72,7 +80,7 @@ function ListQuestions({ navigation, isFocused }) {
                                         : 'Sem resposta'}
                                 </Status>
                             </Left>
-                            <Date>{item.dataFormated}</Date>
+                            <TextDate>{item.dateFormated}</TextDate>
                         </HeaderAnswer>
                         <Content>{item.question}</Content>
                     </Answer>

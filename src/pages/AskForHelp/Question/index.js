@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Container, Header, Title, Date, Content, Card } from './styles';
+import { Container, Header, Title, DateText, Content, Card } from './styles';
 
 export default function Question({ navigation }) {
     const { data } = navigation.state.params;
@@ -11,7 +11,7 @@ export default function Question({ navigation }) {
             <Card>
                 <Header>
                     <Title>PERGUNTA</Title>
-                    <Date>Hoje às 14h</Date>
+                    <DateText>{data.dateFormated}</DateText>
                 </Header>
                 <Content>{data.question}</Content>
                 <Title>RESPOSTA</Title>
