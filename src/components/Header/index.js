@@ -1,14 +1,22 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 
+import { signOut } from '~/store/modules/auth/actions';
+
 import logo from '~/assets/logo_header.png';
 
-import { Container, Image, Back } from './styles';
+import { Container, Image, Back, Logout } from './styles';
 
 export default function Header({ navigation }) {
-    console.tron.log(navigation);
+    const dispatch = useDispatch();
     const routeName = navigation ? navigation.state.routeName : '';
+
+    function logout() {
+        dispatch(signOut());
+    }
+
     return (
         <Container>
             <Back>
@@ -23,6 +31,9 @@ export default function Header({ navigation }) {
                 )}
             </Back>
             <Image source={logo} />
+            <Logout onPress={logout}>
+                <Icon name="exit-to-app" color="#ee4e62" size={24} />
+            </Logout>
         </Container>
     );
 }

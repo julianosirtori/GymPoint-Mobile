@@ -9,7 +9,8 @@ export const Container = styled.View`
     border-bottom-width: 1;
     align-items: center;
     padding-left: 20px;
-    justify-content: center;
+    padding-right: 20px;
+    justify-content: space-between;
 `;
 
 export const Image = styled.Image`
@@ -17,7 +18,6 @@ export const Image = styled.Image`
     height: 19px;
 `;
 
-export const Back = styled.TouchableOpacity`
-    position: absolute;
-    left: 20px;
-`;
+export const Back = styled.TouchableOpacity``;
+
+export const Logout = styled.TouchableOpacity``;
