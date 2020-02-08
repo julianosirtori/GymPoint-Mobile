@@ -1,4 +1,4 @@
-# GymPoint-BackEnd
+# Aplicação Mobile do Projeto Gympoint
 Mobile do Projeto Gympoint
 
 OBS: Foi testado apenas em dispositivos android
